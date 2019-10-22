@@ -4,21 +4,22 @@ import Search from './Search';
 
 class Navbar extends Component {
 
+    
 loginStatus(props){
     if(this.props.login){
         return (<ul className="navbar-nav ml-auto">
                 <li className="nav-item active">
-                    <a className="nav-link" href="#">Logout</a>
+                    <Link to='/' className="nav-link" onClick={() => {this.props.onLogin(false)} }>Logout</Link>
                 </li>  
             </ul>);
     }
     else{
         return (<ul className="navbar-nav ml-auto">
-                <li className="nav-item active">
+                <li className="nav-item">
                     <a className="nav-link" href="#">Register</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Login</a>
+                    <Link to='/' className="nav-link" onClick={() => {this.props.onLogin(true)} }>Login</Link>
                 </li>    
             </ul>);
     }
@@ -26,12 +27,7 @@ loginStatus(props){
 
 searchStatus(props){
     if(this.props.login){
-        return(<Router>
-                <Link to="/search" className="nav-link">Search</Link>
-                <Switch>
-                    <Route path="/search" component={Search} />
-                </Switch>
-            </Router>)   
+        return(<Link to="/search" className="nav-link">Search</Link>) 
     }
     else{
         return(<a className="nav-link disabled" href="#" >Search</a>)
@@ -43,7 +39,7 @@ searchStatus(props){
             <a className="navbar-brand display-4" href="#">React + API</a>
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Home </a>
+                    <Link to="/" className="nav-link">Home</Link>
                 </li>
                 <li className="nav-item">
                     {this.searchStatus()}

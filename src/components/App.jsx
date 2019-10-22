@@ -8,15 +8,12 @@ import axios from 'axios';
 class App extends Component {
   render() {
     return(
-      <Router>
-        <Link to='/'>Home</Link>
-        <Link to='/search'>Search</Link>
-
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/search' component={Search} />
-        </Switch>
-      </Router>
+            <Router>
+                <Switch>
+                    <Route exact path='/' component={Home} />
+                    <Route path='/search' component={Search} />
+                </Switch>
+            </Router>
     );
   }
 }

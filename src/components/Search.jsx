@@ -3,9 +3,12 @@ import Navbar from './Navbar';
 
 class Search extends Component {
     state = {
-        login : true,
+        login : false,
     }
 
+    handleLogin = (login) =>{
+        this.setState({login:login})
+    }
     loginStatus(){
         if (this.state.login){
             return (<div className="container-fluid d-flex align-items-center justify-content-center h-100">
@@ -30,7 +33,9 @@ class Search extends Component {
     render() {
         return (
             <div>            
-                <Navbar login={this.state.login} />
+                <Navbar login={this.state.login}
+                    onLogin = {this.handleLogin}
+                    />
                 {this.loginStatus()}
             </div>
             

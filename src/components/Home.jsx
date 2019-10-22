@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
 class Home extends Component {
   state = {
-      login : true,
+      login : false,
   }
+
+handleLogin = (login) =>{
+    this.setState({login:login})
+}
+
 
  loginStatus(){
      if(this.state.login){
          return (<div className="container-fluid d-flex align-items-center justify-content-center h-100">
                 <div className="row mt-5">
                     <div className="col-6">
-                        <a href="#"><button type="button" className="btn btn-dark">Logout</button></a>
+                        <Link to='/' className="btn btn-dark" onClick={() => {this.handleLogin(false)} }>Logout</Link>
                     </div>
                 </div>
             </div>)
@@ -33,7 +39,9 @@ class Home extends Component {
   render() {
     return (
         <div>
-            <Navbar login={this.state.login} />
+            <Navbar login={this.state.login} 
+                onLogin = {this.handleLogin}                
+                />
             <div className="container-fluid d-flex align-items-center justify-content-center h-100">
                 <div className="row d-flex justify-content-center text-center">
                     <div className="col-md-5">

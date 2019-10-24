@@ -8,7 +8,7 @@ class Cards extends Component {
         if (this.props.cards){
             return(
                 <div className="container-fluid d-flex align-items-center justify-content-center h-100">
-                    <div className="row">{ this.props.cards.map(card => <Card name={card.name} handle={card.login} location={card.location} following={card.following} followers={card.followers} repos={card.repos} />)}
+                    <div className="row">{ this.props.cards.map(card => <Card key={card.id} url={card.url}/>)}
       </div></div>
             )
         }

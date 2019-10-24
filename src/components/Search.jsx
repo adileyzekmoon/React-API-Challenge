@@ -12,8 +12,8 @@ class Search extends Component {
         userData:[],
     }
 
-    textInput = (name) =>{
-        fetch("https://api.github.com/search/users?q="+name)
+    textInput = () =>{
+        fetch("https://api.github.com/search/users?q="+this.state.currentSearch+"&per_page=9")
         .then(res=>res.json())
         .then(data=>this.setState({userData:data.items}))
     }
@@ -25,7 +25,8 @@ class Search extends Component {
         if (this.state.login){
             return (<div>
                 <div className="container-fluid d-flex align-items-center justify-content-center h-100 mt-5">
-                    <input type="text" name='search' className='form-control' placeholder="Enter name" onChange={(e) => this.textInput(e.target.value)} style={{width : "200px"}}></input>
+                    <input type="text" name='search' className='form-control' placeholder="Enter name" onChange={(e) => this.setState({currentSearch:e.target.value})} style={{width : "200px"}}></input>
+                    <button type="button" className="btn btn-secondary" onClick={this.textInput}>Search</button>
                 </div>
                 <div className="container-fluid d-flex align-items-center justify-content-center h-100">
                     <h4 className="my-5">No user stored in this profile.</h4>

@@ -2,22 +2,30 @@ const express = require('express');
 const router = express.Router();
 var User = require('../models/user');
 
-router.get('/', (req, res, next) => {
+router.get('/store', (req, res, next) => {
   User.find((err, user) => {
-    if(err)
-      res.send(err);
+//    if(err)
+//      res.send(err);
 
-    res.json(user);
+    res.send("Hello bitch");
   });
+});
+
+router.post('/store', (req, res) => {
+    User.find((err,user) => {
+        if(err){
+            res.send(err);
+        }
+        res.json({message: "Hello there"});
+        });
 });
 
 router.post('/add', (req, res) => {
   let data = new User();
 
-  const { name } = req.body;
+  const { url } = req.body;
 
-  data.name = name;
-  data.company = 'Code for Asia';
+  data.url = url;
 
   data.save((err) => {
     if(err)

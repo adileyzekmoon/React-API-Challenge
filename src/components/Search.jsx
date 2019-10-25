@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Card from './Card';
 import Cards from './Cards';
+import axios from 'axios';
 
 class Search extends Component {
     state = {
@@ -10,6 +11,13 @@ class Search extends Component {
         cardCount : 0,
         currentSearch:"",
         userData:[],
+        storedData:[],
+    }
+
+    currentStore = () => {
+        axios.get('http://localhost:3001/users/store')
+    .then(res => res.json())
+    .then(data => console.log(data));
     }
 
     textInput = () =>{
@@ -24,7 +32,7 @@ class Search extends Component {
     loginStatus(){
         if (this.state.login){
             return (<div>
-                <div className="container-fluid d-flex align-items-center justify-content-center h-100 mt-5">
+                <div className="container-fluid d-flex align-items-center justify-content-center h-100 mt-5 w-auto">
                     <input type="text" name='search' className='form-control' placeholder="Enter name" onChange={(e) => this.setState({currentSearch:e.target.value})} style={{width : "200px"}}></input>
                     <button type="button" className="btn btn-secondary" onClick={this.textInput}>Search</button>
                 </div>
@@ -35,14 +43,14 @@ class Search extends Component {
         else{
             return (
                 <div>
-                    <div className="container-fluid d-flex align-items-center justify-content-center h-100">
+                    <div className="container-fluid d-flex align-items-center justify-content-center h-100 w-auto">
                         <div className="row d-flex justify-content-center text-center">
                             <div className="col-md-5">
                                 <h1 className="display-4 text-dark pt-5 mb-2 mt-5">You need to be logged in to view this page!</h1>
                             </div>
                         </div>
                     </div>
-                    <div className="container-fluid d-flex align-items-center justify-content-center h-100">
+                    <div className="container-fluid d-flex align-items-center justify-content-center h-100 w-auto">
                         <div className="row mt-5">
                             <div className="col-6">
                                 <Link  className="btn btn-dark" onClick={() => {this.handleLogin(true)} }>Login</Link>
@@ -59,6 +67,9 @@ class Search extends Component {
                 <Navbar login={this.state.login}
                     onLogin = {this.handleLogin}
                     />
+                <Cards
+                    cards={this.state.storedData}/>
+                {this.currentStore()}
                 {this.loginStatus()}
                 <Cards
                     cards={this.state.userData}/>

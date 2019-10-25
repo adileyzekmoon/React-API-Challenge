@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 
 const user = mongoose.model('User', {
-  name: String,
-  company: String
+  url: String,
 });
 
 module.exports = user

@@ -14,6 +14,14 @@ mongoose.connect(db.url, {
   useUnifiedTopology: true
 });
 
+//app.get('/store', (req, res) => {
+//    console.log(user.find())
+//  res.json({message: "Hello there"});
+//    const User = new user();
+//    res.send(User.find());
+//});
+
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
   extended: false

@@ -11,17 +11,13 @@ class Search extends Component {
         cardCount : 0,
         currentSearch:"",
         userData:[],
-        storedData:[],
+        storedData:null,
     }
 
     currentStore = () => {
         axios.get('http://localhost:3001/users/store')
-            .then(res => console.log(res))
-            .then(data => this.setState({storedData:data}));
-                  
-            console.log(this.storedData)
-//        console.log(this.userData)
-            
+            .then(res => this.setState({storedData:res.data}));
+        
     }
 
     textInput = () =>{
@@ -71,10 +67,10 @@ class Search extends Component {
                 <Navbar login={this.state.login}
                     onLogin = {this.handleLogin}
                     />
-                <Cards
-                    cards={this.state.storedData}/>
-                {this.currentStore()}
                 {this.loginStatus()}
+                {this.currentStore()}
+                <Cards
+                    store={this.state.storedData}/>
                 <Cards
                     cards={this.state.userData}/>
                 

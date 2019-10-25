@@ -10,7 +10,7 @@ router.get('/store', (req, res, next) => {
         if(err){
             res.send(err);
         }
-        res.json(user);
+         res.json(user);
         });
       
 //    res.send("Hello bitch");
@@ -22,7 +22,7 @@ router.post('/store', (req, res) => {
         if(err){
             res.send(err);
         }
-        res.json({message: "Hello there"});
+        res.json({message: "Hello there"});   
         });
 });
 

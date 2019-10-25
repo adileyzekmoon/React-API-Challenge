@@ -12,6 +12,13 @@ class Cards extends Component {
       </div></div>
             )
         }
+        else if (this.props.store){
+            return(
+                <div className="container-fluid d-flex align-items-center justify-content-center">
+                    <div className="row d-flex align-items-center justify-content-center">{ this.props.store.map(user => <Card key={user._id} url={user.url}/>)}
+      </div></div>
+            )
+        }
     }
     
     render() {

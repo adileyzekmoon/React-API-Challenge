@@ -11,14 +11,38 @@ class Card extends Component {
         followers:0,
         following:0,
         repos:0,
-        dp:null
+        dp:null,
+        storeCheck:""
         
+    }
+
+    checkDb = () => {
+        axios.get('http://localhost:3001/users/store')
+            .then(res => this.setState({storeCheck:JSON.stringify(res)}));
     }
 
     addToDb = () => {
     axios.post('http://localhost:3001/users/add', {
       url: this.props.url,
     });
+    }
+    
+    cardButton = () => {
+        if (this.state.storeCheck.includes("/" + this.state.handle + "\"")){
+            return <button className="btn btn-danger btn-sm" style={{borderRadius: "50%"}} onClick={this.addToDb}>X</button>
+        }
+        else{
+            return <button className="btn btn-success btn-sm" style={{borderRadius: "50%"}} onClick={this.addToDb}>+</button> 
+        }
+    }
+    
+    cardStyle = () => {
+        if (this.state.storeCheck.includes("/" + this.state.handle + "\"")){
+            return "col-3 m-4 h-auto card border-primary"
+        }
+        else{
+            return "col-3 m-4 h-auto card border-secondary"
+        }        
     }
 
     componentDidMount() {
@@ -40,11 +64,11 @@ class Card extends Component {
 
   render() {
     return( 
-        <div className="col-3 m-4 h-auto card border-secondary">
+        <div className={this.cardStyle()}>
             <div className="card-body container-fluid" >
                 <div className="row">
                     <div className="col w-25">
-                        <button className="btn btn-success btn-sm" style={{borderRadius: "50%"}} onClick={this.addToDb}>+</button>
+                        {this.cardButton()}
                         <img src={this.state.dp} className="w-100" style={{borderRadius: "50%"}}/>
                     </div>
                     <div className="col">
@@ -56,6 +80,8 @@ class Card extends Component {
                     
                 </div>
             </div>
+            
+        {this.checkDb()}
         </div>
                 
         

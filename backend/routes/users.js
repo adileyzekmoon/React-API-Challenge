@@ -6,8 +6,14 @@ router.get('/store', (req, res, next) => {
   User.find((err, user) => {
 //    if(err)
 //      res.send(err);
-
-    res.send("Hello bitch");
+    User.find((err,user) => {
+        if(err){
+            res.send(err);
+        }
+        res.json(user);
+        });
+      
+//    res.send("Hello bitch");
   });
 });
 

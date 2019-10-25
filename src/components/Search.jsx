@@ -16,8 +16,12 @@ class Search extends Component {
 
     currentStore = () => {
         axios.get('http://localhost:3001/users/store')
-    .then(res => res.json())
-    .then(data => console.log(data));
+            .then(res => console.log(res))
+            .then(data => this.setState({storedData:data}));
+                  
+            console.log(this.storedData)
+//        console.log(this.userData)
+            
     }
 
     textInput = () =>{
